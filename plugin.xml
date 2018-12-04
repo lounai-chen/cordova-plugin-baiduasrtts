@@ -1,0 +1,155 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin xmlns:android="http://schemas.android.com/apk/res/android" id="cordova-plugin-baiduasrtts"
+        version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0">
+    <name>Baiduasrtts</name>
+    <preference name="APIKEY"/>
+    <preference name="SECRETKEY"/>
+    <preference name="APPID"/>
+    <js-module name="Baiduasrtts" src="www/baiduasrtts.js">
+        <clobbers target="Baiduasrtts"/>
+    </js-module>
+    <platform name="ios">
+        <config-file parent="/*" target="config.xml">
+            <feature name="Baiduasrtts">
+                <param name="ios-package" value="CDVBaiduasrtts"/>
+            </feature>
+            <preference name="baiduasrttsappid" value="$APPID"/>
+            <preference name="baiduasrttsapikey" value="$APIKEY"/>
+            <preference name="baiduasrttssecretkey" value="$SECRETKEY"/>
+        </config-file>
+
+        <framework src="libc++.tbd" weak="true"/>
+        <framework src="libz.1.2.5.tbd" weak="true"/>
+        <framework src="AudioToolbox.framework" weak="true"/>
+        <framework src="AVFoundation.framework" weak="true"/>
+        <framework src="CFNetwork.framework" weak="true"/>
+        <framework src="CoreLocation.framework" weak="true"/>
+        <framework src="CoreTelephony.framework" weak="true"/>
+        <framework src="SystemConfiguration.framework" weak="true"/>
+        <framework src="libsqlite3.tbd" weak="true"/>
+
+        <framework src="libiconv.2.4.0.tbd" weak="true"/>
+        <framework src="GLKit.framework" weak="true"/>
+
+        <header-file src="src/ios/BDSClientHeaders/ASR/BDSEventManager.h"/>
+        <header-file src="src/ios/BDSClientHeaders/ASR/BDSASRDefines.h"/>
+        <header-file src="src/ios/BDSClientHeaders/ASR/BDSASRParameters.h"/>
+
+        <header-file src="src/ios/BDSClientHeaders/TTS/BDS_EttsModelManagerInterface.h"/>
+        <header-file src="src/ios/BDSClientHeaders/TTS/BDSTTSEventManager.h"/>
+        <header-file src="src/ios/BDSClientHeaders/TTS/BDSSynthesizerStatusNotifications.h"/>
+        <header-file src="src/ios/BDSClientHeaders/TTS/BDSSynthesizerLogLevel.h"/>
+        <header-file src="src/ios/BDSClientHeaders/TTS/BDSSpeechSynthesizerParams.h"/>
+        <header-file src="src/ios/BDSClientHeaders/TTS/BDSSpeechSynthesizerErrors.h"/>
+        <header-file src="src/ios/BDSClientHeaders/TTS/BDSSpeechSynthesizerDelegate.h"/>
+        <header-file src="src/ios/BDSClientHeaders/TTS/BDSSpeechSynthesizer.h"/>
+        <header-file src="src/ios/BDSClientHeaders/TTS/BDSMixedModeSynthesizer.h"/>
+        <header-file src="src/ios/BDSClientHeaders/TTS/BDSBuiltInPlayer.h"/>
+
+ 
+        <source-file framework="true" src="src/ios/BDSClientLib/ASR/libBaiduSpeechSDK.a"/>
+        <source-file framework="true" src="src/ios/BDSClientLib/TTS/libBaiduSpeech_TTS_SDK.a"/>
+
+        <resource-file src="src/ios/BDSClientLib/ASR/bds_easr_basic_model.dat"/>
+        <resource-file src="src/ios/BDSClientLib/ASR/bds_easr_dnn_wakeup_model.dat"/>
+        <resource-file src="src/ios/BDSClientLib/ASR/bds_easr_gramm.dat"/>
+        <resource-file src="src/ios/BDSClientLib/ASR/bds_easr_input_model.dat"/>
+        <resource-file src="src/ios/BDSClientLib/ASR/bds_easr_mfe_cmvn.dat"/>
+        <resource-file src="src/ios/BDSClientLib/ASR/bds_easr_mfe_dnn.dat"/>
+        <resource-file src="src/ios/BDSClientLib/ASR/bds_easr_wakeup_words.dat"/>
+        <resource-file src="src/ios/BDSClientLib/ASR/bds_license.dat"/> 
+        <resource-file src="src/ios/BDSClientLib/ASR/temp_license_2018-02-24.dat"/>
+
+        <resource-file src="src/ios/BDSClientLib/TTS/Chinese_And_English_Text.dat"/> 
+        <resource-file src="src/ios/BDSClientLib/TTS/Chinese_And_English_Speech_Female.dat"/> 
+        <resource-file src="src/ios/BDSClientLib/TTS/offline_engine_tmp_license.dat"/> 
+        <resource-file src="src/ios/BDSClientLib/TTS/tmp_license.dat"/>
+
+        <source-file src="src/ios/CDVBaiduasrtts.m"/>
+
+
+        <config-file parent="NSMicrophoneUsageDescription" target="*-Info.plist">
+            <string>是否允许使用您的麦克风？</string>
+        </config-file>
+
+    </platform>
+
+    <platform name="android">
+        <config-file parent="/*" target="res/xml/config.xml">
+            <feature name="Baiduasrtts">
+                <param name="android-package" value="org.apache.cordova.baiduasrtts.Baiduasrtts"/>
+            </feature>
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <meta-data
+                    android:name="com.baidu.speech.APP_ID"
+                    android:value="$APPID"/>
+            <meta-data
+                    android:name="com.baidu.speech.API_KEY"
+                    android:value="$APIKEY"/>
+            <meta-data
+                    android:name="com.baidu.speech.SECRET_KEY"
+                    android:value="$SECRETKEY"/>
+            <service
+                    android:name="com.baidu.speech.VoiceRecognitionService"
+                    android:exported="false"/>
+        </config-file>
+
+        <config-file parent="/*" target="AndroidManifest.xml">
+            <uses-permission android:name="android.permission.RECORD_AUDIO"/>  
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>  
+            <uses-permission android:name="android.permission.INTERNET"/>  
+            <uses-permission android:name="android.permission.READ_PHONE_STATE"/>  
+            <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>  
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>  
+            <uses-permission android:name="android.permission.WRITE_SETTINGS"/>  
+            <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>  
+            <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>  
+            <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>  
+            <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>  
+            <uses-permission android:name="android.permission.BROADCAST_STICKY"/>  
+            <uses-permission android:name="android.permission.BLUETOOTH"/>  
+            <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>  
+            <uses-permission android:name="android.permission.READ_CONTACTS"/>  
+            <uses-permission android:name="android.permission.WAKE_LOCK"/> 
+        </config-file>
+
+
+        <source-file src="src/android/libs/bdasr_V3_20180320_9066860.jar" target-dir="libs"/>  
+        <source-file src="src/android/libs/com.baidu.tts_2.3.1.20170808_e39ea89.jar" target-dir="libs"/>  
+        <source-file src="src/android/libs/armeabi/libBaiduSpeechSDK.so" target-dir="libs/armeabi"/>  
+        <source-file src="src/android/libs/armeabi/libvad.dnn.so" target-dir="libs/armeabi"/>  
+        <source-file src="src/android/libs/armeabi/libbd_etts.so" target-dir="libs/armeabi"/>  
+        <source-file src="src/android/libs/armeabi/libBDSpeechDecoder_V1.so" target-dir="libs/armeabi"/>  
+        <source-file src="src/android/libs/armeabi/libbdtts.so" target-dir="libs/armeabi"/>  
+        <source-file src="src/android/libs/armeabi/libgnustl_shared.so" target-dir="libs/armeabi"/>  
+        <source-file src="src/android/libs/arm64-v8a/libBaiduSpeechSDK.so" target-dir="libs/arm64-v8a"/>  
+        <source-file src="src/android/libs/arm64-v8a/libvad.dnn.so" target-dir="libs/arm64-v8a"/>  
+        <source-file src="src/android/libs/arm64-v8a/libbd_etts.so" target-dir="libs/arm64-v8a"/>  
+        <source-file src="src/android/libs/arm64-v8a/libBDSpeechDecoder_V1.so" target-dir="libs/arm64-v8a"/>  
+        <source-file src="src/android/libs/arm64-v8a/libbdtts.so" target-dir="libs/arm64-v8a"/>  
+        <source-file src="src/android/libs/arm64-v8a/libgnustl_shared.so" target-dir="libs/arm64-v8a"/>  
+        <source-file src="src/android/libs/armeabi-v7a/libBaiduSpeechSDK.so" target-dir="libs/armeabi-v7a"/>  
+        <source-file src="src/android/libs/armeabi-v7a/libvad.dnn.so" target-dir="libs/armeabi-v7a"/>  
+        <source-file src="src/android/libs/armeabi-v7a/libbd_etts.so" target-dir="libs/armeabi-v7a"/>  
+        <source-file src="src/android/libs/armeabi-v7a/libBDSpeechDecoder_V1.so" target-dir="libs/armeabi-v7a"/>  
+        <source-file src="src/android/libs/armeabi-v7a/libbdtts.so" target-dir="libs/armeabi-v7a"/>  
+        <source-file src="src/android/libs/armeabi-v7a/libgnustl_shared.so" target-dir="libs/armeabi-v7a"/>  
+        <source-file src="src/android/libs/x86/libBaiduSpeechSDK.so" target-dir="libs/x86"/>  
+        <source-file src="src/android/libs/x86/libvad.dnn.so" target-dir="libs/x86"/>  
+        <source-file src="src/android/libs/x86/libbd_etts.so" target-dir="libs/x86"/>  
+        <source-file src="src/android/libs/x86/libBDSpeechDecoder_V1.so" target-dir="libs/x86"/>  
+        <source-file src="src/android/libs/x86/libbdtts.so" target-dir="libs/x86"/>  
+        <source-file src="src/android/libs/x86/libgnustl_shared.so" target-dir="libs/x86"/>  
+        <source-file src="src/android/libs/x86_64/libBaiduSpeechSDK.so" target-dir="libs/x86_64"/>  
+        <source-file src="src/android/libs/x86_64/libvad.dnn.so" target-dir="libs/x86_64"/>  
+        <source-file src="src/android/libs/x86_64/libbd_etts.so" target-dir="libs/x86_64"/>  
+        <source-file src="src/android/libs/x86_64/libBDSpeechDecoder_V1.so" target-dir="libs/x86_64"/>  
+        <source-file src="src/android/libs/x86_64/libbdtts.so" target-dir="libs/x86_64"/>  
+        <source-file src="src/android/libs/x86_64/libgnustl_shared.so" target-dir="libs/x86_64"/> 
+
+
+        <source-file src="src/android/Baiduasrtts.java" target-dir="src/org/apache/cordova/baiduasrtts"/>
+
+    </platform>
+</plugin>

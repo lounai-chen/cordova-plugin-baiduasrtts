@@ -1,0 +1,30 @@
+{
+  "name": "cordova-plugin-baiduasrtts",
+  "version": "0.0.1",
+  "description": "a cordova plugin, a JS version of baiduasrtts",
+  "cordova": {
+    "id": "cordova-plugin-baiduasrtts",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios",
+    "cordova-plugin-baiduasrtts",
+    "ASR",
+    "BaiduAsr"
+  ],
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "bugs": {
+    "url": ""
+  },
+  "homepage": "",
+  "author": "",
+  "license": "ISC"
+}
