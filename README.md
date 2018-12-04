@@ -110,3 +110,12 @@ function startSpeechRecognize(){
 ```
 
 
+## 注意事项
+以下文件太大，需自己去百度官网SDK下载
+
+src\ios\BDSClientLib\ASR\bds_easr_input_model.dat
+
+src\ios\BDSClientLib\ASR\libBaiduSpeechSDK.a
+ 
+
+src\ios\BDSClientLib\TTS\libBaiduSpeech_TTS_SDK.a
